@@ -41,9 +41,9 @@ export default {
       initIcon,
       headerMenuItems: [
         {
-          title: $__('advertisements'),
+          title: $__('home'),
           to: '/',
-          icon: 'comment'
+          icon: 'home'
         },
         {
           title: $__('categories'),
