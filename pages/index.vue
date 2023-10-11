@@ -100,7 +100,7 @@
                   class="tw-cursor-pointer"
                   :title="item.title"
                   :image-url="`https://app.pardisnow.ir/${item?.photo?.dir}/${item?.photo?.path}`"
-                  :rate="item.rating"
+                  :rating="item.rating"
                   type="vertical"
                 />
               </slide>

@@ -8,7 +8,7 @@
                  :imageUrl="imageUrl" />
     <MPVerticalCard v-else-if="type === 'vertical'"
                     :title="title"
-                    :rate="rate"
+                    :rating="rating"
                     :imageUrl="imageUrl" />
   </div>
 </template>
@@ -31,7 +31,7 @@ export default {
       type: String,
       default: ''
     },
-    rate: {
+    rating: {
       required: false,
       type: Number,
       default: 0
