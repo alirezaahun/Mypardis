@@ -109,13 +109,15 @@
         </div>
       </template>
       <template v-if="!category.ads">
-        <div class="tw-block sm:tw-hidden tw-pt-[35%] tw-relative">
-          <img
-            class="tw-absolute tw-top-0 tw-right-0 tw-bottom-0 tw-left-0 tw-w-full tw-h-full tw-rounded-xl tw-object-cover"
-            :src="`https://app.pardisnow.ir/${category?.photo?.dir}/${category?.photo?.path}`"
-            alt=""
-          />
-        </div>
+        <NuxtLink :to="`/advertisement/${category.advertising_id}`">
+          <div class="tw-block sm:tw-hidden tw-pt-[35%] tw-relative">
+            <img
+              class="tw-absolute tw-top-0 tw-right-0 tw-bottom-0 tw-left-0 tw-w-full tw-h-full tw-rounded-xl tw-object-cover"
+              :src="`https://app.pardisnow.ir/${category?.photo?.dir}/${category?.photo?.path}`"
+              alt=""
+            />
+          </div>
+        </NuxtLink>
       </template>
     </div>
   </div>
