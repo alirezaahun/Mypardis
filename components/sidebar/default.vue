@@ -39,7 +39,7 @@
         <li @click="signOut" class="tw-flex tw-justify-between tw-items-center tw-py-2 tw-cursor-pointer">
           <div class="tw-flex tw-items-center">
             <div class="tw-p-1 tw-rounded tw-bg-white">
-              <i class="tw-w-6 tw-block" v-html="initIcon('comment', '#444557')" />
+              <i class="tw-w-6 tw-block" v-html="initIcon('logout', '#444557')" />
             </div>
             <span class="tw-pr-4" />
             <span>{{ $__('signOutOfTheUserAccount') }}</span>
@@ -71,6 +71,11 @@ export default {
       user: {},
       sidebarMenuList: [
         {
+          title: $__('home'),
+          to: '/',
+          icon: 'home'
+        },
+        {
           title: $__('myAd'),
           to: '/advertisement',
           icon: 'comment'
@@ -78,12 +83,12 @@ export default {
         {
           title: $__('wallet'),
           to: '/wallet',
-          icon: 'comment'
+          icon: 'wallet'
         },
         {
           title: $__('bookmarks'),
           to: '/bookmark',
-          icon: 'comment'
+          icon: 'bookmark'
         },
         {
           title: $__('specialAdRequest'),
@@ -93,27 +98,27 @@ export default {
         {
           title: $__('applicationTraining'),
           to: '/app-training',
-          icon: 'comment'
+          icon: 'onDeviceTraining'
         },
         {
           title: $__('ticketSupport'),
           to: '/tickets',
-          icon: 'comment'
+          icon: 'supportAgent'
         },
         {
           title: $__('contactUs'),
           to: '/contact-us',
-          icon: 'comment'
+          icon: 'phone'
         },
         {
           title: $__('termsAndConditions'),
           to: '/term-and-conditions',
-          icon: 'comment'
+          icon: 'gavel'
         },
         {
           title: $__('aboutMyPardis'),
           to: '/about-us',
-          icon: 'comment'
+          icon: 'group'
         },
       ]
     }
