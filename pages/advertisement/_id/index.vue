@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="tw-pb-4">
-      <BackNavigation :title="adDetail.title ?? ''" />
+      <BackNavigation />
     </div>
     <div class="tw-grid tw-grid-cols-12 tw--m-0 sm:tw--mx-2">
       <div
