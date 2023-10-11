@@ -1,14 +1,13 @@
 export const state = () => ({
-  user: null,
-  fetchUserIsLoading: false
+  blockerLoading: false,
+  transparentLoading: false
 })
 
 export const mutations = {
-  setUser (state, userData) {
-    state.user = userData
+  setBlockerLoading (state, loading) {
+    state.blockerLoading = loading
   },
-  setUserLoading (state, userLoading) {
-    console.log('userLoading: ', userLoading)
-    state.fetchUserIsLoading = userLoading
-  }
+  setTransparentLoading (state, loading) {
+    state.transparentLoading = loading
+  },
 }

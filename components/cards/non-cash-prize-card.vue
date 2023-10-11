@@ -12,15 +12,12 @@
         <p class="tw-overflow-hidden tw-max-h-16 tow-line-ellipsis">
           <span class="tw-font-semibold">{{ dataModel.title ?? '' }}</span>
         </p>
-        <p class="tw-overflow-hidden tw-max-h-16 one-line-ellipsis">
-          <span>{{ $__('pointsRequired').replace('{value}', dataModel.score ?? '') }}</span>
-        </p>
       </div>
     </div>
     <div class="tw-p-4 tw-border-dashed tw-border-t tw-border-primary tw-relative">
       <div class="tw-flex tw-justify-between tw-items-center ">
         <p class="tw-overflow-hidden tw-max-h-16 one-line-ellipsis">
-          <span>{{ $__('awardsAmount').replace('{value}', dataModel.price ?? '') }}</span>
+          <span>{{ $__('pointsRequired').replace('{value}', dataModel.score ?? '') }}</span>
         </p>
         <span class="tw-text-blue-400">{{ $__('observation') }}</span>
       </div>
@@ -32,7 +29,7 @@
 
 <script>
 export default {
-  name: "CashPrizeCard",
+  name: "NonCashPrizeCard",
   props: {
     dataModel: {
       type: Object,

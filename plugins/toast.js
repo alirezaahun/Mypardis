@@ -1,5 +1,10 @@
-import { __ } from '~/shared/i18n';
+export default (content, inject) => {
+  const toast = (type, message, duration = 5000) => {
+    return content.$toast[type](message, {
+      position: 'bottom-right',
+      duration
+    })
+  }
 
-export default (_ctx, inject) => {
-  inject('__', __);
+  inject('Toast', toast)
 };

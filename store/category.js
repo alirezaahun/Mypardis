@@ -1,9 +1,9 @@
 export const state = () => ({
-  sidebarIsOpen: false
+  categories: []
 })
 
 export const mutations = {
-  setSidebarStatus (state, sidebarStatus) {
-    state.sidebarIsOpen = sidebarStatus
+  setCategoriesList (state, categoriesList) {
+    state.categories = categoriesList
   }
 }

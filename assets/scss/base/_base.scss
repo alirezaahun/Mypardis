@@ -1,6 +1,8 @@
 body {
-  font-family: $open-sans-regular !important;
-  font-size: 1.4rem;
+  font-family: $yekanbakh_regular !important;
   box-sizing: border-box;
-  color: $color-text-default;
+  background-color: white;
+  min-height: 100vh;
+  direction: rtl;
+  color: $white;
 }

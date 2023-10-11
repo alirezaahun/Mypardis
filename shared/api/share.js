@@ -1,3 +1,3 @@
-export const aboutUs = {
-  getAboutAndContact: '/v1/getAboutAndContact'
+export const share = {
+  uploadFile: '/v1/uploadFile'
 }

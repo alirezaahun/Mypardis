@@ -1,9 +1,18 @@
 export const state = () => ({
-  categories: []
+  cashAwardsList: [],
+  nonCashAwardsList: []
 })
 
 export const mutations = {
-  setCategoriesList (state, categoriesList) {
-    state.categories = categoriesList
+  setAwardsList (state, awards) {
+    if (awards.length) {
+      awards.forEach(el => {
+        if (el.type === 'cash') {
+          state.cashAwardsList.push(el)
+        } else if (el.type === 'non-cash') {
+          state.nonCashAwardsList.push(el)
+        }
+      })
+    }
   }
 }

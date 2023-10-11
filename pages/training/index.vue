@@ -1,13 +1,9 @@
 <template>
-$END$
+  <div>Application Training</div>
 </template>
 
 <script>
 export default {
-name: "index"
+  name: "ApplicationTraining"
 }
 </script>
-
-<style scoped>
-
-</style>

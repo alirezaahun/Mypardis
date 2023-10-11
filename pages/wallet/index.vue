@@ -1,13 +1,11 @@
 <template>
-$END$
+  <div>
+    Wallet
+  </div>
 </template>
 
 <script>
 export default {
-name: "index"
+  name: "Wallet"
 }
 </script>
-
-<style scoped>
-
-</style>

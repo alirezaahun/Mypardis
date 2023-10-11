@@ -1,15 +1,15 @@
 <template>
   <div>
     <div class="tw-pb-4">
-      <BackNavigation :title="$__('categories')" />
+      <BackNavigation :title="$__('selectCategory')" />
     </div>
     <div class="tw-grid tw-grid-cols-12 tw--m-0 sm:tw--mx-2">
       <template v-for="(category, index) in categories">
         <div
           :key="category.id"
-          class="tw-col-span-12 md:tw-col-span-3 tw-my-2 tw-m-0 sm:tw-mx-2"
+          class="tw-col-span-12 md:tw-col-span-3 md:tw-my-2 tw-m-0 md:tw-mx-2"
         >
-          <NuxtLink :key="category.id" :to="category?.childrenCount ? `/categories/${category.id}` : `/categories/advertisement/${category.id}`" class="tw-block">
+          <NuxtLink :key="category.id" :to="category?.childrenCount ? `/advertisement/create/categories/${category.id}` : `/advertisement/create/${category.id}`" class="tw-block">
             <div :class="index < categories.length - 1 && ['tw-border-b', 'tw-border-white']"
                  class="tw-block md:tw-hidden tw-py-4 tw-px-2 tw-cursor-pointer hover:tw-bg-primary-400 tw-transition-all">
               <CategoryCard :title="category.title" :image-url="`https://app.pardisnow.ir/${category?.photo?.dir}/${category?.photo?.path}`" />

@@ -4,7 +4,7 @@ export default {
   data() {
     return {
       notificationsList: [],
-      notificationDetail: {}
+      notificationDetail: {},
     }
   },
   beforeMount() {
@@ -23,6 +23,7 @@ export default {
         return
       }
 
+      this.$store.commit('notifications/setNotificationsList', data)
       this.notificationsList = data
     },
   },
@@ -30,12 +31,12 @@ export default {
     notificationsList: {
       handler(value) {
         const id = this.$route.params.id ?? null
-        const target = value.filter(el => +el.id === +id)
+        const target = value.filter((el) => +el.id === +id)
         if (id && target.length) {
           this.notificationDetail = target[0]
         }
       },
-      immediate: true
-    }
-  }
+      immediate: true,
+    },
+  },
 }

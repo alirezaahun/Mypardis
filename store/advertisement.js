@@ -1,9 +1,13 @@
 export const state = () => ({
-  categories: []
+  favoriteAds: [],
+  categoryWithAds: []
 })
 
 export const mutations = {
-  setCategoriesList (state, categoriesList) {
-    state.categories = categoriesList
+  setFavoriteAds (state, favoriteAds) {
+    state.favoriteAds = favoriteAds
+  },
+  setCategoryWithAds (state, categoryWithAds) {
+    state.categoryWithAds = categoryWithAds
   }
 }

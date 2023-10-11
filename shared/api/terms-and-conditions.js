@@ -1,3 +1,3 @@
 export const termsAndConditions = {
-  getTermsAndConditions: '/terms'
+  getTermsAndConditions: '/v1/terms'
 }

@@ -1,370 +1,163 @@
 <template>
-  <GridCol>
+  <div>
     <div
-      ref="textInput"
-      :class="[
-        styles[`height${height}`],
-        styles.textInput,
-        suggestions.length && styles.positionRelative,
-        notVulid && styles.textInputError,
-        noBorder && !notVulid ? styles.borderColorTransparent : ''
-      ]"
+      :class="errorMessageList.length ? 'tw-border-red-500' : 'tw-border-gray-300'"
+      class="text-input tw-relative tw-border tw-border-gray-300 tw-text-gray-200 tw-rounded tw-h-14 tw-px-3 tw-w-full tw-text-xl"
     >
-      <div
-        v-if="focusInput && (suffix || !!$slots.suffix || (hint && !loading))"
-      >
-        <div
-          v-if="!!$slots.suffix"
-          :class="[
-            styles.flexRowCenter,
-            styles.textInputSuffix,
-            suffixWidth,
-            isLtr
-              ? [styles.right10, styles.pL10]
-              : [styles.left10, styles.pR10],
-            !isLtr && styles.textInputSuffixLtr
-          ]"
-        >
-          <slot name="suffix" />
-        </div>
-
-        <div
-          v-else
-          :class="[
-            styles.flexRowCenter,
-            styles.textInputSuffix,
-            suffixWidth,
-            isLtr
-              ? [styles.right10, styles.pL10]
-              : [styles.left10, styles.pR10],
-            !isLtr && styles.textInputSuffixLtr
-          ]"
-        >
-          <span :class="[styles.textInputSuffixText]">
-            {{ suffix }}
-          </span>
-          <Icon
-            v-if="hint"
-            :class="styles.lH0"
-            name="question"
-            size="lg"
-            :tooltip="hint"
-            toolTipMaxWidth="true"
-            type="disabled"
-          />
-          <span :class="styles.pR10" />
-          <div :class="[styles.textInputSuffixDivider, styles.mT5]" />
-        </div>
-      </div>
-      <span v-if="notVulid" :class="styles.textInputMessage">
-        {{ message }}
-      </span>
+      <input
+        ref="input"
+        :value="value"
+        class="text-input__input tw-h-full tw-bg-transparent tw-w-full"
+        :class="[textCenter ? 'tw-text-center' : '']"
+        :placeholder="placeholder"
+        :required="validation?.required"
+        :isValid="isValid"
+        type="text"
+        @input="emitInputValue"
+        @focus="onInputFocus"
+        @focusout="onInputFocusout"
+      />
       <span
-        v-if="!placeholder"
-        :class="[
-          styles.textInputTitle,
-          focusInput && styles.textInputTitleFocus
-        ]"
+        class="text-input__title tw-bg-primary tw-px-2 tw-transition-all tw-text-lg"
+        :class="[titleStatus === 'open' ? 'text-input__title-open' : '']"
+        @click="onTitleClick"
+        >{{ `${title} ${validation.required ? '*' : ''}` }}</span
       >
-        <span>
-          {{ title }}
-        </span>
-        <span v-if="required" :class="styles.textInputTitleStar"> * </span>
-      </span>
       <div
-        :class="[
-          styles.textInputWrapper,
-          isLtr && styles.textInputLtr,
-          styles.flexCenter
-        ]"
+        v-if="errorMessageList.length"
+        class="tw-absolute tw--bottom-3 tw-right-2 tw-bg-primary tw-text-red-500 tw-px-2"
       >
-        <div v-if="icon" :class="styles.textInputIcon">
-          <Icon :name="icon" :size="iconSize" type="disabled" />
-        </div>
-        <Tooltip location="bottom" :title="tooltip">
-          <input
-            ref="input"
-            v-disabled="disabled"
-            autocomplete="off"
-            :class="[styles.textInputInput, clearable && styles.pR25]"
-            :isvulid="computeIsVulid"
-            :placeholder="placeholder"
-            :readonly="isPasswordType && !focusInput"
-            :type="type"
-            :value="displayValue"
-            :vulidation="vulidation"
-            @focus="(e) => onFocusHandler(e, true)"
-            @focusout="(e) => onFocusHandler(e, false)"
-            @input="onInputHandler"
-            @paste="onPasteHandler"
-          />
-        </Tooltip>
-        <Progress v-if="loading" size="md" />
-      </div>
-      <div v-if="showSuggestedItem" :class="styles.textInputSuggestion">
-        <List :class="[styles.textInputSuggestionList, styles.scrollbar]">
-          <template #listItem>
-            <ListItem
-              v-for="item in suggestions"
-              :key="item.title"
-              @click="selectSuggestedItem(item)"
-            >
-              <span>
-                {{ item.title }}
-              </span>
-            </ListItem>
-          </template>
-        </List>
+        <span class="tw-text-sm tw-rounded">
+          {{ errorMessageList[0].text }}
+        </span>
       </div>
     </div>
-  </GridCol>
+  </div>
 </template>
 
 <script>
-import styles from '@sass'
-import __ from '@localization'
-import {
-  stringPropType,
-  booleanPropType,
-  objectPropType
-} from '@componentUtils'
-import { vulidateText, faToEnDigits } from '@utils'
-import { errorMessages } from '@messages'
-import Icon from '../icon/Icon'
-import GridCol from '../grid/GridCol'
-import { arrayPropType } from '@componentUtils'
-import Progress from '../progress/Progress'
-import List from '../list/List'
-import ListItem from '../list/ListItem'
-import Tooltip from '@components/ui/tooltip/Tooltip'
-
 export default {
   name: 'TextInput',
-  components: { Tooltip, ListItem, List, Progress, GridCol, Icon },
-  inject: ['lang', 'vulidator'],
   props: {
-    ltr: booleanPropType(false, false),
-    icon: stringPropType(false),
-    hint: stringPropType(false, ''),
-    type: stringPropType(false, 'text'),
-    title: stringPropType(false),
-    suffix: stringPropType(false),
-    filter: stringPropType(false),
-    iconSize: stringPropType(false, 'md'),
-    disabled: booleanPropType(false, false),
-    clearable: booleanPropType(false, false),
-    vulidation: stringPropType(false, 'none'),
-    modelValue: stringPropType(false),
-    suffixStyle: objectPropType(false, {}),
-    placeholder: stringPropType(),
-    loading: booleanPropType(false, false),
-    suggestions: arrayPropType(false, []),
-    height: stringPropType(false, '50'),
-    tooltip: stringPropType(false, ''),
-    noBorder: booleanPropType(false, false)
+    value: {
+      type: String,
+      required: false,
+    },
+    placeholder: {
+      type: String,
+      required: false,
+      default: '',
+    },
+    title: {
+      type: String,
+      required: false,
+      default: '',
+    },
+    textCenter: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+    validation: {
+      required: false,
+      default: {
+        required: false
+      }
+    }
   },
-  emits: ['selectSuggestedItem', 'update:modelValue'],
+  emits: ['update:modelValue'],
   data() {
     return {
-      styles,
-      focusInput: false,
-      notVulid: false,
-      message: '',
-      isVulid: true,
-      showSuggestedItem: false
+      inputValue: this.value,
+      errorMessageList: [],
+      isFocused: false,
+      isValid: true,
     }
   },
   computed: {
-    isNumberType() {
-      return this.type === 'number'
-    },
-    isCurrencyType() {
-      return this.type === 'currency'
-    },
-    isEmailType() {
-      return this.type === 'email'
-    },
-    isPasswordType() {
-      return this.type === 'password'
-    },
-    isLtr() {
-      return (
-        this.isNumberType ||
-        this.isEmailType ||
-        this.isPasswordType ||
-        this.isCurrencyType ||
-        this.ltr
-      )
-    },
-    required() {
-      if (!this.vulidation.includes('required')) {
-        this.resetValue()
+    titleStatus() {
+      if (this.isFocused || this.value) {
+        return 'open'
       }
-      return this.vulidation.includes('required')
+
+      return 'close'
     },
-    computeIsVulid() {
-      return this.isVulid && (this.required ? this.modelValue !== '' : true)
-    },
-    suffixWidth() {
-      return styles[this.suffixStyle.width]
-    },
-    displayValue: {
-      get() {
-        if (this.filter === 'price') {
-          return this.separateNumber(this.modelValue)
-        } else {
-          return this.modelValue
-        }
-      },
-      set() {
-        this.createInputEmit()
-      }
-    }
   },
   methods: {
-    selectSuggestedItem(item) {
-      this.$emit('selectSuggestedItem', item)
-      document.removeEventListener('click', this.closeSuggestionList)
-      this.showSuggestedItem = false
+    emitInputValue(e) {
+      this.inputValue = e.target.value
+      this.$emit('input', e.target.value)
     },
-    onFocusHandler(e, isFocus) {
-      if (e.target.value !== '') {
-        this.focusInput = true
-        return
-      }
-      this.focusInput = isFocus
+    onInputFocus() {
+      this.isFocused = true
     },
-    onInputHandler(e) {
-      this.createInputEmit(e.target.value)
+    onInputFocusout() {
+      if (this.validation.required && !this.inputValue) {
+        this.isValid = false
+        this.errorMessageList.push({
+          type: 'required',
+          text: this.$__('fillFieldIsRequired')
+        })
+      }
+      this.isFocused = false
     },
-    onPasteHandler(e) {
-      if (!this.isNumberType) {
-        return
-      }
-
-      const pastedValue = (e.clipboardData || window.clipboardData).getData(
-        'text'
-      )
-
-      if (!isNaN(pastedValue)) {
-        return
-      }
-
-      e.preventDefault()
+    onTitleClick() {
+      this.$refs.input.focus()
     },
-    separateNumber(value) {
-      if (!value) {
-        return ''
-      }
-
-      let castedValue = value.toString()
-      castedValue = castedValue.replace(/,/g, '')
-
-      return castedValue.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-    },
-    createInputEmit(value) {
-      if (this.filter === 'price') {
-        value = value.replace(/,/g, '')
-      }
-
-      if (this.vulidation.split('#').find((el) => el === 'isNumeric')) {
-        value = faToEnDigits(value)
-      }
-
-      this.$emit('update:modelValue', value)
-    },
-    resetValue() {
-      this.message = ''
-      this.isVulid = true
-      this.notVulid = false
-    },
-    closeSuggestionList(e) {
-      const textInput = this.$refs.textInput
-      const target = e.target
-
-      if (textInput.contains(target)) {
-        return
-      }
-
-      this.showSuggestedItem = false
-    }
   },
   watch: {
-    modelValue(value) {
-      if (value === '') {
-        this.resetValue()
-
-        if (this.vulidator) {
-          setTimeout(() => {
-            this.vulidator(true)
-          }, 1)
-        }
-
-        return
+    value: {
+      handler(value) {
+        this.inputValue = value
       }
-
-      const vulue = value ? value.toString() : ''
-      let isVulid = true
-
-      if (this.vulidation !== 'none') {
-        const vulidatorTypes = this.vulidation.split('#')
-
-        isVulid = vulidateText(vulue, vulidatorTypes)
-
-        if (this.required && vulue === '') {
-          isVulid = false
-        }
-
-        this.isVulid = isVulid
-        this.notVulid = !isVulid
-
-        let currentInVulid = ''
-
-        if (value === '' && this.required) {
-          currentInVulid = 'required'
-        } else {
-          currentInVulid =
-            vulidatorTypes.length > 1
-              ? vulidatorTypes
-                  .filter((el) => el !== 'required')[0]
-                  .split('*')[0]
-                  .trim()
-              : vulidatorTypes[0].split('*')[0].trim()
-        }
-
-        this.message = !isVulid
-          ? __(errorMessages[currentInVulid], this.lang())
-          : ''
-      }
-
-      if (this.vulidator) {
-        setTimeout(() => {
-          this.vulidator(isVulid)
-        }, 1)
-      }
-
-      this.focusInput = vulue !== ''
     },
-    suggestions: {
-      handler() {
-        this.showSuggestedItem = true
-        document.addEventListener('click', this.closeSuggestionList)
+    inputValue: {
+      handler(value) {
+        if (value && this.validation.required && this.errorMessageList.findIndex(el => el.type === 'required') !== -1) {
+          this.errorMessageList = this.errorMessageList.filter(el => el.type !== 'required')
+        }
+
+        if (value && this.validation.required) {
+          this.isValid = true
+        }
+
+        if (!value && this.validation.required) {
+          this.isValid = false
+        }
       },
-      deep: true
+      immediate: true
+    },
+    isValid: {
+      handler(value) {
+        if (this.validation.required && !this.inputValue) {
+          this.isValid = false
+        }
+        this.$emit('isValid', value)
+      },
+      immediate: true
     }
   },
-  created() {
-    if (this.vulidator) {
-      setTimeout(() => {
-        this.vulidator(true)
-      }, 1)
-    }
-
-    if (this.modelValue === '') {
-      return
-    }
-
-    this.focusInput = true
-  }
 }
 </script>
+
+<style scoped lang="scss">
+.text-input {
+  background: transparent;
+  outline: none;
+
+  &__input {
+    outline: none;
+  }
+
+  &__title {
+    position: absolute;
+    right: 0.5rem;
+    top: 50%;
+    transform: translate(0, -50%);
+
+    &-open {
+      transform: translate(0, -150%);
+    }
+  }
+}
+</style>

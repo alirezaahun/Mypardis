@@ -1,33 +1,54 @@
-@each $colorName, $color in $colors {
-  .bg-#{$colorName} {
-    background: #{$color} !important;
+.one-line-ellipsis {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  white-space: pre-wrap;
+}
+
+.tow-line-ellipsis {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  white-space: pre-wrap;
+}
+
+.three-line-ellipsis {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  white-space: pre-wrap;
+}
+
+.yekanbakh-regular {
+  * {
+    font-family: $yekanbakh_regular !important;
+  }
+}
+
+.rtl {
+  direction: rtl !important;
+}
+
+.ltr {
+  direction: ltr !important;
+}
+
+.default-scrollbar {
+  &::-webkit-scrollbar {
+    width: 0.6rem;
+    height: 0.6rem;
   }
 
-  .color-#{$colorName} {
-    color: #{$color} !important;
+  &::-webkit-scrollbar-thumb {
+    border-radius: 3px;
+    background-color: #282833;
   }
-}
 
-@each $gradientName, $gradients in $gradients {
-  .gradient-#{$gradientName} {
-    background-image: #{$gradients} !important;
+  &::-webkit-scrollbar-track {
+    border-radius: 3px;
+    background-color: #525369;
   }
-}
-
-@each $display in $displays {
-  .d-#{$display} {
-    display: #{$display} !important;
-  }
-}
-
-.full-rounded {
-  border-radius: 10rem;
-}
-
-.default-shadow {
-  box-shadow: $default-shadow;
-}
-
-.medium {
-  font-family: $open-sans-medium;
 }

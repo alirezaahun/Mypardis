@@ -1,49 +1,58 @@
 <template>
   <div>
-    <div class="text-input tw-relative tw-border-2 tw-border-white tw-rounded tw-h-14 tw-px-3 tw-w-full tw-text-xl">
-      <input  :value="value"
-              @input="emitInputValue"
-              class="text-input__input tw-h-full tw-bg-transparent tw-w-full"
-              :placeholder="placeholder"
-              :required="required"
-              @focus="onInputFocus"
-              @focusout="onInputFocusout"
-              type="text">
-      <span class="text-input__title tw-bg-primary tw-px-2 tw-transition-all tw-text-lg" :class="[this.titleStatus === 'open' ? 'text-input__title-open' : '']">{{ title }}</span>
+    <div
+      class="textarea-input tw-relative tw-border tw-border-gray-300 tw-text-gray-200 tw-rounded tw-p-3 tw-w-full tw-text-xl"
+    >
+      <textarea
+        ref="input"
+        :value="value"
+        class="textarea-input__input tw-h-full tw-bg-transparent tw-w-full"
+        :placeholder="placeholder"
+        :required="required"
+        type="text"
+        @input="emitInputValue"
+        @focus="onInputFocus"
+        @focusout="onInputFocusout"
+      >
+      </textarea>
+      <span
+        @click="onTitleClick"
+        class="textarea-input__title tw-bg-primary tw-px-2 tw-transition-all tw-text-lg"
+        :class="[titleStatus === 'open' ? 'textarea-input__title-open' : '']"
+        >{{ title }}</span>
     </div>
-
   </div>
 </template>
 
 <script>
 export default {
-  name: 'textInput',
+  name: 'TextareaInput',
   props: {
     value: {
       type: String,
-      required: false
+      required: false,
     },
     placeholder: {
       type: String,
       required: false,
-      default: ''
+      default: '',
     },
     required: {
       type: Boolean,
       required: false,
-      default: false
+      default: false,
     },
     title: {
       type: String,
       required: false,
-      default: ''
+      default: '',
     },
   },
   emits: ['update:modelValue'],
   data() {
     return {
       inputValue: '',
-      isFocused: false
+      isFocused: false,
     }
   },
   computed: {
@@ -53,7 +62,7 @@ export default {
       }
 
       return 'close'
-    }
+    },
   },
   methods: {
     emitInputValue(e) {
@@ -64,30 +73,33 @@ export default {
     },
     onInputFocusout() {
       this.isFocused = false
+    },
+    onTitleClick() {
+      this.$refs.input.focus()
     }
-  }
-
+  },
 }
 </script>
 
 <style scoped lang="scss">
-  .text-input {
-    background: transparent;
+.textarea-input {
+  background: transparent;
+  outline: none;
+  min-height: 150px;
+
+  &__input {
     outline: none;
+    min-height: 150px
+  }
 
-    &__input {
-      outline: none;
-    }
+  &__title {
+    position: absolute;
+    right: 0.5rem;
+    top: 10px;
 
-    &__title {
-      position: absolute;
-      right: 0.5rem;
-      top: 50%;
-      transform: translate(0, -50%);
-
-      &-open {
-        transform: translate(0, -150%);
-      }
+    &-open {
+      top: -15px;
     }
   }
+}
 </style>

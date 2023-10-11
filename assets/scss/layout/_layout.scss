@@ -1,19 +1,18 @@
-body {
-  background-color: white;
-  min-height: 100vh;
-}
-
 .default-layout {
   width: 100%;
   margin: 0 auto;
   padding: 0 5%;
 
-  @include respond( tab-land ) {
+  @include respond( default ) {
     padding: 0 7rem;
   }
 
+  @include respond( tab-land ) {
+    padding: 0 3rem;
+  }
+
   @include respond( tab-port ) {
-    padding: 0 1rem;
+    padding: 0 2rem;
   }
 
   @include respond( phone ) {

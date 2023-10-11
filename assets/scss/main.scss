@@ -1,4 +1,3 @@
-@tailwind utilities;
 @import './abstracts/fonts',
 './abstracts/mixin',
 './abstracts/variables';
@@ -6,5 +5,3 @@
 './base/base',
 './base/utilities';
 @import './layout/layout';
-@import './tailwind/tailwind';
-@import './vuetify/vuetify';

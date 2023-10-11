@@ -1,3 +1,4 @@
-export const aboutUs = {
-  getAboutAndContact: '/v1/getAboutAndContact'
+export const notifications = {
+  getAll: '/v1/notification',
+  setView: (id) => `/v1/notification/${id}`
 }

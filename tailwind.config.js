@@ -68,25 +68,52 @@ module.exports = {
     listStyleType: {
       dash: '"  -  "'
     },
-    // TODO: Check all colors once the project is done, remove redundant colors and rename the rest
-    colors: {
-      primary: '#0fbe76',
-      default: '#616161',
-      white: '#ffffff',
-      'gray-100': '#F3F4F6',
-      'gray-200': '#E5E7EB',
-      'gray-300': '#D1D5DB',
-      'gray-400': '#9CA3AF',
-      'gray-500': '#6B7280',
-      'blue-400': '#60a5fa',
-      transparent: 'transparent',
-      background: '#f2f4f5'
-    },
     keyframes: {
       pulse: {
         '0%, 100%': { opacity: 0 },
         '50%': { opacity: 1 }
       }
-    }
+    },
+    colors: {
+      'transparent': 'rgba(0, 0, 0, 0)',
+      'text-gray': '#616161',
+      'white': '#ffffff',
+      'dark': '#000000',
+      'primary': '#444557',
+      'primary-100': '#7d7e9f',
+      'primary-200': '#6f708d',
+      'primary-300': '#61627b',
+      'primary-400': '#525369',
+      'primary-500': '#444557',
+      'primary-600': '#363745',
+      'primary-700': '#282833',
+      'blue-100': '#dbeafe',
+      'blue-200': '#bfdbfe',
+      'blue-300': '#93c5fd',
+      'blue-400': '#60a5fa',
+      'blue-500': '#0ea5e9',
+      'blue-600': '#2563eb',
+      'blue-700': '#1d4ed8',
+      'blue-800': '#1e40af',
+      'blue-900': '#1e3a8a',
+      'red-100': '#fee2e2',
+      'red-200': '#fecaca',
+      'red-300': '#fca5a5',
+      'red-400': '#f87171',
+      'red-500': '#ef4444',
+      'red-600': '#dc2626',
+      'red-700': '#b91c1c',
+      'red-800': '#991b1b',
+      'red-900': '#7f1d1d',
+      'gray-100': '#f3f4f6',
+      'gray-200': '#e5e7eb',
+      'gray-300': '#d1d5db',
+      'gray-400': '#9ca3af',
+      'gray-500': '#6b7280',
+      'gray-600': '#4b5563',
+      'gray-700': '#374151',
+      'gray-800': '#1f2937',
+      'gray-900': '#111827',
+     }
   }
 }

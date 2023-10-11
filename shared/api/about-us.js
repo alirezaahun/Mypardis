@@ -1,3 +1,3 @@
-export const termsAndConditions = {
-  getTermsAndConditions: '/terms'
+export const aboutUs = {
+  getAboutAndContact: '/v1/getAboutAndContact'
 }

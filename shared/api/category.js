@@ -1,6 +1,4 @@
-export const advertisement = {
-  newAds: '/newAds',
-  getAllAds: '/advertising',
-  getCategoryWithAds: '/getCategoryWithAds',
-  favoriteAds: '/favoriteAds'
+export const category = {
+  getCategories: '/v1/getCategories',
+  getCategoriesById: (id) => `/v1/getCategories/${id}`,
 }

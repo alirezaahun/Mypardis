@@ -1,14 +1,16 @@
-export default headerMenuItems = [
-  {
-    title: this.$__('Advertisements'),
-    route: {}
-  },
-  {
-    title: this.$__('Categories'),
-    route: {}
-  },
-  {
-    title: this.$__('Customer club'),
-    route: {}
+export default {
+  data: ({ $__ }) => {
+    return {
+      headerMenuItems: [
+        {
+          title: $__('categories'),
+          to: '/categories'
+        },
+        {
+          title: $__('customerClub'),
+          to: 'customer-club/cash-prize'
+        }
+      ]
+    }
   }
-]
+}

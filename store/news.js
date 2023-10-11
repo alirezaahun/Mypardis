@@ -1,14 +1,9 @@
 export const state = () => ({
-  user: null,
-  fetchUserIsLoading: false
+  news: [],
 })
 
 export const mutations = {
-  setUser (state, userData) {
-    state.user = userData
+  setNews (state, news) {
+    state.news = news
   },
-  setUserLoading (state, userLoading) {
-    console.log('userLoading: ', userLoading)
-    state.fetchUserIsLoading = userLoading
-  }
 }
