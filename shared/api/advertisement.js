@@ -4,7 +4,7 @@ export const advertisement = {
   store: '/v1/advertising',
   getCategoryWithAds: '/v1/getCategoryWithAds',
   favoriteAds: '/v1/favoriteAds',
-  getAdvertisingByCategory: (id) => `/getAdvertisingByCategory/${id}`,
+  getAdvertisingByCategory: (id) => `/v1/getAdvertisingByCategory/${id}`,
   getReportage: '/v1/reportage',
   report: (id) => `/v1/report/${id}`,
   likeOrDisLike: (id) => `/v1/likeOrDisLike/${id}`,

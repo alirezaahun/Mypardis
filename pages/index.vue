@@ -1,6 +1,6 @@
 <template>
   <div class="tw-py-12">
-    <LandingFirstViewCarousel :list="favoriteAds"/>
+    <LandingFirstViewCarousel :list="favoriteAds" />
 
     <div v-if="categories.length" class="tw-mt-12">
       <h3 class="tw-text-1.5xl tw-m-0 tw-font-bold">{{ $__('category') }}</h3>
@@ -62,26 +62,39 @@
       </div>
     </div>
 
-    <div v-for="category in categoryWithAds" :key="category.id" class="tw-mt-12">
+    <div
+      v-for="category in categoryWithAds"
+      :key="category.id"
+      class="tw-mt-12"
+    >
       <template v-if="category.ads && category.ads.length">
-        <h3 class="tw-text-1.5xl tw-m-0 tw-font-bold">
-          {{ category.title ?? '' }}
-        </h3>
+        <div class="tw-flex tw-justify-between tw-items-center">
+          <h3 class="tw-text-1.5xl tw-m-0 tw-font-bold one-line-ellipsis tw-flex-1">
+            <span>{{ category.title ?? '' }}</span>
+          </h3>
+          <NuxtLink :to="`categories/advertisement/${category.id}`" class="tw-flex tw-justify-end tw-items-center">
+            <span>{{ $__('showAll') }}</span>
+            <span class="tw-pr-1" />
+            <i class="tw-w-6" v-html="initIcon('chevronLeft')"></i>
+          </NuxtLink>
+        </div>
         <div class="tw-mt-4">
           <div class="tw--me-2 md:tw--mx-4">
             <carousel
               v-bind="carouselOptions"
               :per-page-custom="[
-              [0, 1.5],
-              [767, 3],
-              [1024, 4],
-            ]"
+                [0, 1.5],
+                [767, 3],
+                [1024, 4],
+              ]"
             >
               <slide
                 v-for="item in category.ads"
                 :key="item.id"
                 class="tw-px-2 md:tw-px-4"
-                @slideclick="() => navigateToDetailCard('advertisement-id', item.id)"
+                @slideclick="
+                  () => navigateToDetailCard('advertisement-id', item.id)
+                "
               >
                 <MPCard
                   class="tw-cursor-pointer"
@@ -97,7 +110,11 @@
       </template>
       <template v-if="!category.ads">
         <div class="tw-block sm:tw-hidden tw-pt-[35%] tw-relative">
-          <img class="tw-absolute tw-top-0 tw-right-0 tw-bottom-0 tw-left-0 tw-w-full tw-h-full tw-rounded-xl tw-object-cover" :src="`https://app.pardisnow.ir/${category?.photo?.dir}/${category?.photo?.path}`" alt="">
+          <img
+            class="tw-absolute tw-top-0 tw-right-0 tw-bottom-0 tw-left-0 tw-w-full tw-h-full tw-rounded-xl tw-object-cover"
+            :src="`https://app.pardisnow.ir/${category?.photo?.dir}/${category?.photo?.path}`"
+            alt=""
+          />
         </div>
       </template>
     </div>
@@ -107,6 +124,7 @@
 <script>
 import MPCard from '~/components/cards/mp-card'
 import { news, advertisement, category } from '~/shared/api'
+import { initIcon } from '~/shared/utility'
 
 export default {
   name: 'IndexPage',
@@ -114,6 +132,7 @@ export default {
   layout: 'default',
   data: () => {
     return {
+      initIcon,
       url: process.env.URL,
       carouselOptions: {
         rtl: true,
@@ -178,12 +197,14 @@ export default {
       this.$router.push({
         name: routeName,
         params: {
-          id: paramsId
+          id: paramsId,
         },
       })
     },
     async fetchCategoryWithAds() {
-      const { data } = await this.$Api.get(advertisement.getCategoryWithAds, { loading: 'BLOCKER' })
+      const { data } = await this.$Api.get(advertisement.getCategoryWithAds, {
+        loading: 'BLOCKER',
+      })
       if (!data) {
         return
       }
@@ -195,7 +216,9 @@ export default {
       }
     },
     async fetchFavoriteAds() {
-      const { data } = await this.$Api.get(advertisement.favoriteAds, { loading: 'BLOCKER' })
+      const { data } = await this.$Api.get(advertisement.favoriteAds, {
+        loading: 'BLOCKER',
+      })
       if (!data) {
         return
       }
@@ -207,7 +230,9 @@ export default {
       }
     },
     async fetchCategories() {
-      const { data } = await this.$Api.get(category.getCategories, { loading: 'BLOCKER' })
+      const { data } = await this.$Api.get(category.getCategories, {
+        loading: 'BLOCKER',
+      })
       if (!data) {
         return
       }
