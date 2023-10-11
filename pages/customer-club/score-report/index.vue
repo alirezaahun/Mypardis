@@ -53,11 +53,11 @@ export default {
               },
               {
                 title: this.$__('score'),
-                value: `${el.type ?? ''}${el.after ?? ''}`
+                value: `${el.type ?? ''}${el.total ?? ''}`
               },
               {
                 title: this.$__('total'),
-                value: el.total ?? ''
+                value: el.after ?? ''
               }
             ]
           }
