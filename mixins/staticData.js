@@ -8,7 +8,7 @@ export default {
         },
         {
           title: $__('customerClub'),
-          to: 'customer-club/cash-prize'
+          to: '/customer-club/cash-prize'
         }
       ]
     }
