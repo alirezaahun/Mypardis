@@ -33,7 +33,6 @@ import LoginForm from '~/components/auth/LoginForm'
 export default {
   name: 'AuthPage',
   components: { LoginForm },
-
   layout: 'empty',
 }
 </script>
