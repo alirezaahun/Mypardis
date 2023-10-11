@@ -1,0 +1,171 @@
+@font-face {
+  font-family: "yekanbakh_black";
+  font-style: normal;
+  font-weight: normal;
+  src: url("../fonts/yekanbakh/YekanBakh-Black.woff2") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "yekanbakh_bold";
+  font-style: normal;
+  font-weight: normal;
+  src: url("../fonts/yekanbakh/YekanBakh-Bold.woff2") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "yekanbakh_light";
+  font-style: normal;
+  font-weight: normal;
+  src: url("../fonts/yekanbakh/YekanBakh-Light.woff2") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "yekanbakh_regular";
+  font-style: normal;
+  font-weight: normal;
+  src: url("../fonts/yekanbakh/YekanBakh-Regular.woff2") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "yekanbakh_medium";
+  font-style: normal;
+  font-weight: normal;
+  src: url("../fonts/yekanbakh/YekanBakh-SemiBold.woff2") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "yekanbakh_black_num";
+  font-style: normal;
+  font-weight: normal;
+  src: url("../fonts/yekanbakh/YekanBakhFaNum-Black.woff2") format("truetype"); /* FF3.6+, IE9, Chrome6+, Saf5.1+ */
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "yekanbakh_light_num";
+  font-style: normal;
+  font-weight: normal;
+  src: url("../fonts/yekanbakh/YekanBakhFaNum-Light.woff2") format("truetype"); /* FF3.6+, IE9, Chrome6+, Saf5.1+ */
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "yekanbakh_regular_num";
+  font-style: normal;
+  font-weight: normal;
+  src: url("../fonts/yekanbakh/YekanBakhFaNum-Regular.woff2") format("truetype"); /* FF3.6+, IE9, Chrome6+, Saf5.1+ */
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "yekanbakh_medium_num";
+  font-style: normal;
+  font-weight: normal;
+  src: url("../fonts/yekanbakh/YekanBakhFaNum-SemiBold.woff2") format("truetype"); /* FF3.6+, IE9, Chrome6+, Saf5.1+ */
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "yekanbakh_bold_num";
+  font-style: normal;
+  font-weight: normal;
+  src: url("../fonts/yekanbakh/YekanBakhFaNum-Bold.woff2") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "yekanbakh_black_no_en";
+  font-style: normal;
+  font-weight: normal;
+  src: url("../fonts/yekanbakh/YekanBakhNoEn-Black.woff2") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "yekanbakh_bold_no_en";
+  font-style: normal;
+  font-weight: normal;
+  src: url("../fonts/yekanbakh/YekanBakhNoEn-Bold.woff2") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "yekanbakh_light_no_en";
+  font-style: normal;
+  font-weight: normal;
+  src: url("../fonts/yekanbakh/YekanBakhNoEn-Light.woff2") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "yekanbakh_regular_no_en";
+  font-style: normal;
+  font-weight: normal;
+  src: url("../fonts/yekanbakh/YekanBakhNoEn-Regular.woff2") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "yekanbakh_medium_no_en";
+  font-style: normal;
+  font-weight: normal;
+  src: url("../fonts/yekanbakh/YekanBakhNoEn-SemiBold.woff2") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "roboto_regular";
+  font-style: normal;
+  font-weight: normal;
+  src: url("../fonts/roboto/Roboto-Regular.ttf") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "roboto_medium";
+  font-style: normal;
+  font-weight: normal;
+  src: url("../fonts/roboto/Roboto-Medium.ttf") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "roboto_bold";
+  font-style: normal;
+  font-weight: normal;
+  src: url("../fonts/roboto/Roboto-Bold.ttf") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "roboto_black";
+  font-style: normal;
+  font-weight: normal;
+  src: url("../fonts/roboto/Roboto-Black.ttf") format("truetype");
+  font-display: swap;
+}
+
+$yekanbakh-black: "yekanbakh_black";
+$yekanbakh-black-num: "yekanbakh_black_num";
+$yekanbakh-black-no-en: "yekanbakh_black_no_en";
+$yekanbakh-bold: "yekanbakh_bold";
+$yekanbakh-bold-num: "yekanbakh_bold_num";
+$yekanbakh-bold-no-en: "yekanbakh_bold_no_en";
+$yekanbakh-light: "yekanbakh_light";
+$yekanbakh-light-num: "yekanbakh_light_num";
+$yekanbakh-light-no-en: "yekanbakh_light_no_en";
+$yekanbakh-medium: "yekanbakh_medium";
+$yekanbakh-medium-num: "yekanbakh_medium_num";
+$yekanbakh-medium-no-en: "yekanbakh_medium_no_en";
+$yekanbakh-regular: "yekanbakh_regular";
+$yekanbakh-regular-num: "yekanbakh_regular_num";
+$yekanbakh-regular-no-en: "yekanbakh_regular_no_en";
+$roboto-regular: "roboto_regular";
+$roboto-medium: "roboto_medium";
+$roboto-bold: "roboto_bold";
+$roboto-black: "roboto_black";

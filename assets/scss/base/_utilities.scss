@@ -1,0 +1,33 @@
+@each $colorName, $color in $colors {
+  .bg-#{$colorName} {
+    background: #{$color} !important;
+  }
+
+  .color-#{$colorName} {
+    color: #{$color} !important;
+  }
+}
+
+@each $gradientName, $gradients in $gradients {
+  .gradient-#{$gradientName} {
+    background-image: #{$gradients} !important;
+  }
+}
+
+@each $display in $displays {
+  .d-#{$display} {
+    display: #{$display} !important;
+  }
+}
+
+.full-rounded {
+  border-radius: 10rem;
+}
+
+.default-shadow {
+  box-shadow: $default-shadow;
+}
+
+.medium {
+  font-family: $open-sans-medium;
+}
