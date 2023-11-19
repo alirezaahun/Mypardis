@@ -13,7 +13,6 @@
         </div>
 
         <div
-          @click="showAdsCardActions(item)"
           :key="item.id"
           class="tw-col-span-12 sm:tw-col-span-6 tw-my-2 tw-m-0 sm:tw-mx-2 tw-block md:tw-hidden"
         >

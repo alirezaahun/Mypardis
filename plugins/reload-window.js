@@ -1,7 +1,6 @@
 import { auth } from "~/shared/api";
 
 export default function (content) {
-  console.log(content);
   window.addEventListener('load', onReloadWindow)
 
   async function onReloadWindow () {

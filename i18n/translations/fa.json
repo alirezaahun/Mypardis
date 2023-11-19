@@ -83,5 +83,11 @@
   "actions": "اقدامات",
   "view": "مشاهده",
   "delete": "حذف",
-  "home": "خانه"
+  "home": "خانه",
+  "showMap": "نمایش نقشه",
+  "closeMap": "بستن نقشه",
+  "selectLocation": "انتخاب موقعیت مکانی",
+  "editLocation": "ویرایش موقعیت مکانی",
+  "save": "ذخیره",
+  "saveLocation": "ثبت موقعیت مکانی"
 }

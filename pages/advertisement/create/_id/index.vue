@@ -92,6 +92,9 @@
                 @isValid="state.address.isValid = $event"
               />
             </div>
+            <div class="tw-col-span-12 tw-py-3 tw-px-0 md:tw-px-2">
+              <CreateAdSelectLocation :value="latLng" @input="changeLatLng" />
+            </div>
             <!--          <div class="tw-col-span-12 tw-py-3 tw-px-0 md:tw-px-2">
               <label
                 for="video"
@@ -147,12 +150,15 @@
             >
               <TextInput
                 v-model="
-                  state.attributes.filter((el) => el.id === attr.id)[0]
-                    .value
+                  state.attributes.filter((el) => el.id === attr.id)[0].value
                 "
                 :validation="{ required: true }"
-                @isValid="state.attributes.filter((el) => el.id === attr.id)[0].isValid = $event"
                 :title="attr.name"
+                @isValid="
+                  state.attributes.filter(
+                    (el) => el.id === attr.id
+                  )[0].isValid = $event
+                "
               />
             </div>
             <div
@@ -162,8 +168,7 @@
             >
               <MpSelect
                 v-model="
-                  state.attributes.filter((el) => el.id === attr.id)[0]
-                    .value
+                  state.attributes.filter((el) => el.id === attr.id)[0].value
                 "
                 :title="attr.name"
                 :items="attr.values"
@@ -176,8 +181,7 @@
             >
               <MpCheckbox
                 v-model="
-                  state.attributes.filter((el) => el.id === attr.id)[0]
-                    .value
+                  state.attributes.filter((el) => el.id === attr.id)[0].value
                 "
                 :title="attr.name"
               />
@@ -223,10 +227,12 @@ import FormWrapper from '~/components/form-field/form-wrapper'
 import { initIcon } from '~/shared/utility'
 import MpSelect from '~/components/form-field/mp-select'
 import MpCheckbox from '~/components/form-field/mp-checkbox'
+import CreateAdSelectLocation from '~/components/advertisement/create-ad-select-location'
 
 export default {
   name: 'Index',
   components: {
+    CreateAdSelectLocation,
     MpCheckbox,
     MpSelect,
     FormWrapper,
@@ -239,6 +245,7 @@ export default {
     return {
       initIcon,
       showAttributeForm: false,
+      latLng: [],
       state: {
         title: {
           value: '',
@@ -296,6 +303,11 @@ export default {
     this.fetchAttribute()
   },
   methods: {
+    changeLatLng(value) {
+      this.latLng = value
+      this.state.lat.value = this.latLng[0]
+      this.state.lng.value = this.latLng[1]
+    },
     onShowAttributeForm() {
       this.showAttributeForm = true
     },
@@ -344,10 +356,18 @@ export default {
       }
 
       this.state.attributes = data.map((el) => {
+        if (el.type === 'boolean') {
+          return {
+            id: el.id,
+            value: el.value === 'دارد',
+            isValid: true,
+          }
+        }
+
         return {
           id: el.id,
           value: '',
-          isValid: true
+          isValid: true,
         }
       })
 
@@ -380,20 +400,22 @@ export default {
         }
 
         if (el === 'attributes') {
-          data[el] = this.state.attributes.length ? this.state.attributes.map((item) => {
-            const type = this.attributesList.filter(
-              (element) => element.id === item.id
-            )[0].type
-            if (type === 'list') {
-              return item.value.value ?? ''
-            }
+          data[el] = this.state.attributes.length
+            ? this.state.attributes.map((item) => {
+                const type = this.attributesList.filter(
+                  (element) => element.id === item.id
+                )[0].type
+                if (type === 'list') {
+                  return item.value.value ?? ''
+                }
 
-            if (type === 'boolean') {
-              return item.value ? this.$__('have') : this.$__('do not have')
-            }
+                if (type === 'boolean') {
+                  return item.value ? this.$__('have') : this.$__('do not have')
+                }
 
-            return item.value ?? ''
-          }) : []
+                return item.value ?? ''
+              })
+            : []
 
           return
         }
@@ -405,10 +427,12 @@ export default {
     },
     async createAds() {
       const params = this.handleAdsParams()
-      await this.$Api.post(advertisement.store, params, { loading: 'TRANSPARENT' })
+      await this.$Api.post(advertisement.store, params, {
+        loading: 'TRANSPARENT',
+      })
 
       this.$router.push({
-        name: 'advertisement'
+        name: 'advertisement',
       })
     },
   },

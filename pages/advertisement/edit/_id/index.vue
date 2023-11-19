@@ -129,6 +129,9 @@
                 @isValid="state.address.isValid = $event"
               />
             </div>
+            <div class="tw-col-span-12 tw-py-3 tw-px-0 md:tw-px-2">
+              <CreateAdSelectLocation :value="latLng" @input="changeLatLng" />
+            </div>
             <!--          <div class="tw-col-span-12 tw-py-3 tw-px-0 md:tw-px-2">
               <label
                 for="video"
@@ -198,10 +201,12 @@ import FormWrapper from '~/components/form-field/form-wrapper'
 import { initIcon } from '~/shared/utility'
 import MpSelect from '~/components/form-field/mp-select'
 import MpCheckbox from '~/components/form-field/mp-checkbox'
+import CreateAdSelectLocation from "~/components/advertisement/create-ad-select-location";
 
 export default {
   name: 'Index',
   components: {
+    CreateAdSelectLocation,
     MpCheckbox,
     MpSelect,
     FormWrapper,
@@ -214,6 +219,7 @@ export default {
     return {
       initIcon,
       showAttributeForm: false,
+      latLng: [],
       state: {
         title: {
           value: '',
@@ -268,6 +274,11 @@ export default {
     this.fetchAdDetail()
   },
   methods: {
+    changeLatLng(value) {
+      this.latLng = value
+      this.state.lat.value = this.latLng[0]
+      this.state.lng.value = this.latLng[1]
+    },
     onShowAttributeForm() {
       this.showAttributeForm = true
     },
@@ -356,6 +367,12 @@ export default {
           this.state.gallery.value = data[el]
         }
         if (Object.keys(this.state).filter((item) => item === el).length) {
+          if (el === 'lat' && data[el]) {
+            this.latLng.unshift(data[el])
+          }
+          if (el === 'lng' && data[el]) {
+            this.latLng.push(data[el])
+          }
           this.state[el].value = data[el]
         }
       })
